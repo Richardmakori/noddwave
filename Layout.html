@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noddewave Creatives — Digital Services Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12141c;
+    --ink-2:#191c27;
+    --panel:#1c2030;
+    --cream:#f4efe4;
+    --cream-dim:#d8d2c3;
+    --cyan:#2fb6db;
+    --gold:#e8a63d;
+    --violet:#7c5cfa;
+    --text-dim:rgba(244,239,228,.62);
+    --max:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:-.01em;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+  }
+  .pulse{
+    width:7px;height:7px;border-radius:50%;background:var(--cyan);
+    box-shadow:0 0 0 0 rgba(47,182,219,.6);
+    animation:pulse 2.2s infinite;
+    flex:none;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(47,182,219,.55);}
+    70%{box-shadow:0 0 0 9px rgba(47,182,219,0);}
+    100%{box-shadow:0 0 0 0 rgba(47,182,219,0);}
+  }
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    padding:20px 0;
+    transition:background .3s ease, padding .3s ease, border-color .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(18,20,28,.86);
+    backdrop-filter:blur(10px);
+    padding:14px 0;
+    border-color:rgba(244,239,228,.08);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:18px;}
+  .logo svg{display:block;}
+  .logo .word{letter-spacing:.01em;}
+  .logo .word span{color:var(--cyan);}
+  .navlinks{display:flex;align-items:center;gap:34px;font-size:14.5px;}
+  .navlinks a{color:var(--text-dim);transition:color .2s;}
+  .navlinks a:hover{color:var(--cream);}
+  .navcall{
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    padding:10px 18px;
+    border:1px solid rgba(244,239,228,.25);
+    border-radius:100px;
+    transition:border-color .2s, background .2s;
+  }
+  .navcall:hover{border-color:var(--cyan);background:rgba(47,182,219,.08);}
+  .navtoggle{display:none;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:190px 0 120px;
+    overflow:hidden;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero h1{
+    font-size:clamp(40px,7vw,84px);
+    line-height:.98;
+    max-width:900px;
+    margin:22px 0 26px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg,var(--cyan),var(--violet) 60%,var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lede{
+    max-width:520px;
+    font-size:17px;
+    line-height:1.65;
+    color:var(--text-dim);
+    margin-bottom:40px;
+  }
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:15px 26px;
+    border-radius:100px;
+    font-size:14.5px;
+    font-weight:600;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn-primary{
+    background:var(--cream);color:var(--ink);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(244,239,228,.18);}
+  .btn-ghost{
+    border:1px solid rgba(244,239,228,.28);
+    font-family:'Space Mono',monospace;
+  }
+  .btn-ghost:hover{border-color:var(--cyan);background:rgba(47,182,219,.08);}
+
+  .wavebox{position:absolute;inset:0;z-index:1;pointer-events:none;}
+  .wavebox svg{position:absolute;}
+  .wave-line{
+    stroke-dasharray:2600;
+    stroke-dashoffset:2600;
+    animation:draw 2.6s cubic-bezier(.4,0,.2,1) forwards .3s;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  .freqrow{
+    display:flex;gap:36px;margin-top:64px;flex-wrap:wrap;
+    font-family:'Space Mono',monospace;
+  }
+  .freqrow div{border-left:1px solid rgba(244,239,228,.16);padding-left:14px;}
+  .freqrow .n{font-size:22px;color:var(--cream);display:block;}
+  .freqrow .l{font-size:11.5px;color:var(--text-dim);letter-spacing:.06em;text-transform:uppercase;}
+
+  /* DIVIDER */
+  .divider{display:block;width:100%;line-height:0;}
+  .divider svg{width:100%;height:auto;display:block;}
+
+  /* SERVICES */
+  .services{background:var(--cream);color:var(--ink);padding:110px 0 120px;position:relative;}
+  .sec-head{max-width:640px;margin-bottom:64px;}
+  .sec-head .eyebrow{color:#b5762a;}
+  .sec-head h2{font-size:clamp(30px,4.4vw,46px);margin-top:16px;line-height:1.05;}
+  .grid-services{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(18,20,28,.12);border:1px solid rgba(18,20,28,.12);}
+  .scard{
+    background:var(--cream);
+    padding:38px 32px 34px;
+    transition:background .25s ease;
+    position:relative;
+  }
+  .scard:hover{background:#eee7d6;}
+  .scard .ic{width:38px;height:38px;margin-bottom:26px;}
+  .scard h3{font-size:19px;margin-bottom:10px;}
+  .scard p{font-size:14.5px;line-height:1.6;color:rgba(18,20,28,.62);}
+  .scard .tag{
+    position:absolute;top:34px;right:32px;
+    font-family:'Space Mono',monospace;font-size:11px;color:rgba(18,20,28,.32);
+  }
+
+  /* APPROACH */
+  .approach{background:var(--ink);padding:120px 0;position:relative;overflow:hidden;}
+  .approach .sec-head .eyebrow{color:var(--cyan);}
+  .approach .sec-head p{color:var(--text-dim);margin-top:16px;max-width:520px;font-size:16px;line-height:1.6;}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:60px;background:rgba(244,239,228,.1);border-top:1px solid rgba(244,239,228,.1);border-bottom:1px solid rgba(244,239,228,.1);}
+  .pillar{background:var(--ink);padding:40px 34px;}
+  .pillar .pl{font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);margin-bottom:22px;display:block;}
+  .pillar h3{font-size:26px;margin-bottom:12px;}
+  .pillar p{font-size:14.5px;line-height:1.65;color:var(--text-dim);}
+
+  /* CONTACT */
+  .contact{background:var(--panel);padding:110px 0 90px;position:relative;overflow:hidden;}
+  .contact .inner{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;position:relative;z-index:2;}
+  .contact h2{font-size:clamp(32px,5vw,54px);line-height:1.03;margin:18px 0 22px;}
+  .contact .lede{color:var(--text-dim);font-size:16px;line-height:1.65;max-width:440px;margin-bottom:36px;}
+  .lines{display:flex;flex-direction:column;gap:18px;font-family:'Space Mono',monospace;}
+  .lines a{font-size:22px;display:flex;align-items:center;gap:12px;transition:color .2s;}
+  .lines a:hover{color:var(--cyan);}
+  .lines a svg{flex:none;}
+  .locrow{margin-top:34px;padding-top:28px;border-top:1px solid rgba(244,239,228,.14);font-size:14.5px;color:var(--text-dim);display:flex;gap:10px;align-items:flex-start;}
+  .cbox{
+    background:var(--ink);border:1px solid rgba(244,239,228,.1);border-radius:18px;padding:38px;
+    align-self:start;
+  }
+  .cbox .eyebrow{margin-bottom:18px;}
+  .cbox h3{font-size:21px;margin-bottom:10px;}
+  .cbox p{font-size:14px;color:var(--text-dim);line-height:1.6;margin-bottom:24px;}
+
+  footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(244,239,228,.08);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  footer .fword{font-family:'Space Mono',monospace;font-size:12px;color:var(--text-dim);}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media(max-width:860px){
+    .navlinks{display:none;}
+    .freqrow{gap:24px;}
+    .grid-services{grid-template-columns:1fr 1fr;}
+    .pillars{grid-template-columns:1fr;}
+    .contact .inner{grid-template-columns:1fr;}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px;}
+    .grid-services{grid-template-columns:1fr;}
+    .hero{padding:150px 0 90px;}
+    .lines a{font-size:18px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <div class="logo">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <path d="M3 20C7 14 10 26 14 20C18 14 21 26 25 20" stroke="url(#lg)" stroke-width="2.6" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="lg" x1="3" y1="20" x2="25" y2="20">
+              <stop stop-color="#7C5CFA"/>
+              <stop offset="1" stop-color="#E8A63D"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="word">NODDEWAVE<span>.</span></span>
+      </div>
+      <div class="navlinks">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="navcall" href="tel:0707192275">0707 192275</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wavebox">
+    <svg width="1400" height="620" viewBox="0 0 1400 620" style="right:-260px;top:60px;opacity:.5;">
+      <path class="wave-line" d="M0 320 C 100 220, 200 420, 300 320 C 400 220, 500 420, 600 320 C 700 220, 800 420, 900 320 C 1000 220, 1100 420, 1200 320 C 1300 220, 1350 320, 1400 300" stroke="#2fb6db" stroke-width="1.4" fill="none" opacity=".55"/>
+    </svg>
+    <svg width="1400" height="620" viewBox="0 0 1400 620" style="right:-300px;top:130px;opacity:.35;">
+      <path class="wave-line" d="M0 300 C 120 380, 220 200, 340 300 C 460 400, 560 200, 680 300 C 800 400, 900 200, 1020 300 C 1140 400, 1240 200, 1400 300" stroke="#7c5cfa" stroke-width="1.4" fill="none" opacity=".5"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow"><span class="pulse"></span>ON AIR — CHUKA, THARAKA NITHI COUNTY</span>
+    <h1>Digital services,<br>broadcast in <em>full&nbsp;signal.</em></h1>
+    <p class="lede">Noddewave Creatives is a digital services agency for brands that want to be seen, heard, and remembered — online and on the ground.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Start a project →</a>
+      <a href="tel:0707192275" class="btn btn-ghost">Call 0707 192275</a>
+    </div>
+    <div class="freqrow">
+      <div><span class="n">06</span><span class="l">Service lines</span></div>
+      <div><span class="n">3</span><span class="l">Direct lines, always on</span></div>
+      <div><span class="n">CHK</span><span class="l">Based in Tharaka Nithi</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 40 C 240 90 480 0 720 40 C 960 80 1200 10 1440 45 L1440 90 L0 90 Z" fill="#f4efe4"/></svg>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">WHAT WE DO</span>
+      <h2>Six service lines, one signal.</h2>
+    </div>
+    <div class="grid-services">
+
+      <div class="scard reveal">
+        <span class="tag">01</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="14" rx="2" stroke="#12141c" stroke-width="1.6"/><path d="M2 8h20" stroke="#12141c" stroke-width="1.6"/><path d="M8 22h8M12 18v4" stroke="#12141c" stroke-width="1.6"/></svg>
+        <h3>Web &amp; Graphic Design</h3>
+        <p>Websites, logos and visual systems built to hold up on every screen your customers use.</p>
+      </div>
+
+      <div class="scard reveal">
+        <span class="tag">02</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#12141c" stroke-width="1.6"/><path d="M8 12h8M12 8v8" stroke="#12141c" stroke-width="1.6"/></svg>
+        <h3>Social Media Management</h3>
+        <p>Content calendars, community management and paid marketing that keep your pages active and growing.</p>
+      </div>
+
+      <div class="scard reveal">
+        <span class="tag">03</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="14" height="12" rx="2" stroke="#12141c" stroke-width="1.6"/><path d="M16 10l6-3v10l-6-3" stroke="#12141c" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h3>Video Editing &amp; Shoot</h3>
+        <p>Filming and editing for ads, events and social — shot on location, cut for attention.</p>
+      </div>
+
+      <div class="scard reveal">
+        <span class="tag">04</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 20l4-9 4 6 3-4 5 7H4z" stroke="#12141c" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="7" r="2" stroke="#12141c" stroke-width="1.6"/></svg>
+        <h3>Photography</h3>
+        <p>Product, portrait and event photography with a fast turnaround for print or digital use.</p>
+      </div>
+
+      <div class="scard reveal">
+        <span class="tag">05</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 4v16M4 4l14 4-14 4" stroke="#12141c" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 14v6" stroke="#12141c" stroke-width="1.6"/></svg>
+        <h3>Event Mobilisation &amp; Planning</h3>
+        <p>Turnout, logistics and on-the-ground coordination so your launch or activation runs on time.</p>
+      </div>
+
+      <div class="scard reveal">
+        <span class="tag">06</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.6 5.8 6.4.6-4.8 4.3 1.4 6.3-5.6-3.4-5.6 3.4 1.4-6.3-4.8-4.3 6.4-.6z" stroke="#12141c" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h3>Branding Strategies</h3>
+        <p>Positioning, voice and identity work that gives a business a point of view worth following.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="approach" id="approach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">HOW WE WORK</span>
+      <h2>Design. Create. Connect.</h2>
+      <p>Three moves, every project. Nothing ships until it's done all three.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <span class="pl">01 / DESIGN</span>
+        <h3>Design</h3>
+        <p>We start with the idea — the look, the message, the plan — before a single asset gets made.</p>
+      </div>
+      <div class="pillar reveal">
+        <span class="pl">02 / CREATE</span>
+        <h3>Create</h3>
+        <p>Then we build it: the site, the shoot, the campaign, the event — produced to a standard we'd put our name on.</p>
+      </div>
+      <div class="pillar reveal">
+        <span class="pl">03 / CONNECT</span>
+        <h3>Connect</h3>
+        <p>Last, we get it in front of people — the audience, the customers, the crowd it was made for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wavebox">
+    <svg width="900" height="500" viewBox="0 0 900 500" style="left:-200px;bottom:-140px;opacity:.18;">
+      <path d="M0 250 C 100 150,200 350,300 250 C 400 150,500 350,600 250 C 700 150,800 350,900 250" stroke="#e8a63d" stroke-width="1.4" fill="none"/>
+    </svg>
+  </div>
+  <div class="wrap inner">
+    <div class="reveal">
+      <span class="eyebrow">GET IN TOUCH</span>
+      <h2>Let's put your brand<br>on the signal.</h2>
+      <p class="lede">Tell us what you're building and which service lines you need — we'll get back to you the same day.</p>
+      <div class="lines">
+        <a href="tel:0707192275"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="#e8a63d" stroke-width="1.6"/></svg>0707 192275</a>
+        <a href="tel:0796277557"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="#e8a63d" stroke-width="1.6"/></svg>0796 277557</a>
+        <a href="tel:0745467119"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="#e8a63d" stroke-width="1.6"/></svg>0745 467119</a>
+      </div>
+      <div class="locrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-top:2px;flex:none;"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12z" stroke="#f4efe4" stroke-width="1.5"/><circle cx="12" cy="9" r="2.4" stroke="#f4efe4" stroke-width="1.5"/></svg>
+        <span>Chuka, Tharaka Nithi County, Kenya</span>
+      </div>
+    </div>
+    <div class="cbox reveal">
+      <span class="eyebrow">QUICK BRIEF</span>
+      <h3>Send us the short version</h3>
+      <p>Business name, what you need, and your best contact number — reply straight to WhatsApp or call.</p>
+      <form onsubmit="event.preventDefault(); window.location.href='tel:0707192275';" style="display:flex;flex-direction:column;gap:12px;">
+        <input required placeholder="Your name" style="background:var(--panel);border:1px solid rgba(244,239,228,.15);border-radius:8px;padding:12px 14px;color:var(--cream);font-family:'Inter',sans-serif;font-size:14px;">
+        <input required placeholder="Phone number" style="background:var(--panel);border:1px solid rgba(244,239,228,.15);border-radius:8px;padding:12px 14px;color:var(--cream);font-family:'Inter',sans-serif;font-size:14px;">
+        <textarea placeholder="What do you need?" rows="3" style="background:var(--panel);border:1px solid rgba(244,239,228,.15);border-radius:8px;padding:12px 14px;color:var(--cream);font-family:'Inter',sans-serif;font-size:14px;resize:vertical;"></textarea>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;border:none;cursor:pointer;">Call us now →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo" style="font-size:15px;">
+      <svg width="22" height="22" viewBox="0 0 30 30" fill="none">
+        <path d="M3 20C7 14 10 26 14 20C18 14 21 26 25 20" stroke="url(#lg2)" stroke-width="2.6" stroke-linecap="round"/>
+        <defs><linearGradient id="lg2" x1="3" y1="20" x2="25" y2="20"><stop stop-color="#7C5CFA"/><stop offset="1" stop-color="#E8A63D"/></linearGradient></defs>
+      </svg>
+      <span class="word">NODDEWAVE CREATIVES</span>
+    </div>
+    <span class="fword">DESIGN. CREATE. CONNECT. — © 2026 Noddewave Creatives, Chuka</span>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
